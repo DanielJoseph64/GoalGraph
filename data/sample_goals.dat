@@ -1,0 +1,124 @@
+goalgraph 1
+# GoalGraph sample data: a university CS student's 4-year degree plan,
+# prerequisite tree, side projects and career goals.
+#
+# The student started in Fall 2024 and is now in the fall of year 3:
+# years 1-2 are completed, the year-3 fall courses are in progress, and
+# everything after that is planned.
+#
+# node <id> <category> <status> <effort 1-10> <enjoyment 1-10> <created_at> <updated_at>
+# edge <source> <target> <type> <effort> <enjoyment> <achievability> <similarity> <time_cost>
+#
+# Edge A -> B of type PREREQ means "A must be completed before B".
+# Weights: effort/enjoyment on a 0-10 scale, achievability/similarity in
+# [0, 1], and time_cost in weeks.
+
+# ---------------------------------------------------------------- year 1 --
+node "cs101-intro-programming"            "year1-fall"   completed   4 8 1724112000 1734307200
+node "math101-calculus-1"                 "year1-fall"   completed   6 5 1724112000 1734307200
+node "math150-discrete-math"              "year1-fall"   completed   5 7 1724112000 1734307200
+node "cs102-object-oriented-programming"  "year1-spring" completed   5 8 1724112000 1747353600
+node "math102-calculus-2"                 "year1-spring" completed   7 4 1724112000 1747353600
+node "wrt101-technical-writing"           "year1-spring" completed   3 5 1724112000 1747353600
+
+# ---------------------------------------------------------------- year 2 --
+node "cs201-data-structures"              "year2-fall"   completed   7 8 1724112000 1765843200
+node "cs210-computer-organization"        "year2-fall"   completed   7 6 1724112000 1765843200
+node "math210-linear-algebra"             "year2-fall"   completed   6 6 1724112000 1765843200
+node "cs220-systems-programming-in-c"     "year2-spring" completed   8 9 1724112000 1778889600
+node "cs230-software-engineering"         "year2-spring" completed   5 6 1724112000 1778889600
+node "stat250-probability-and-statistics" "year2-spring" completed   6 5 1724112000 1778889600
+
+# ---------------------------------------------------------------- year 3 --
+node "cs301-algorithms"                   "year3-fall"   in_progress 9 8 1724112000 1788998400
+node "cs310-operating-systems"            "year3-fall"   in_progress 9 9 1724112000 1788998400
+node "cs320-databases"                    "year3-fall"   in_progress 6 6 1724112000 1788998400
+node "cs330-computer-networks"            "year3-spring" not_started 7 7 1724112000 1724112000
+node "cs340-theory-of-computation"        "year3-spring" not_started 8 6 1724112000 1724112000
+node "cs350-machine-learning"             "year3-spring" not_started 8 9 1724112000 1724112000
+
+# ---------------------------------------------------------------- year 4 --
+node "cs401-compilers"                    "year4-fall"   not_started 9 8 1724112000 1724112000
+node "cs410-distributed-systems"          "year4-fall"   not_started 8 8 1724112000 1724112000
+node "cs420-computer-security"            "year4-fall"   not_started 7 9 1724112000 1724112000
+node "cs490-capstone-project-1"           "year4-fall"   not_started 8 8 1724112000 1724112000
+node "cs450-deep-learning"                "year4-spring" not_started 8 9 1724112000 1724112000
+node "cs491-capstone-project-2"           "year4-spring" not_started 8 8 1724112000 1724112000
+
+# --------------------------------------------------------- side projects --
+node "proj-personal-website"              "side-project" completed   3 7 1727740800 1730419200
+node "proj-discord-study-bot"             "side-project" completed   4 9 1738368000 1743465600
+node "proj-weekend-hackathon"             "side-project" abandoned   4 6 1740787200 1743465600
+node "proj-goalgraph"                     "side-project" in_progress 7 10 1756684800 1788998400
+node "proj-toy-os-kernel"                 "side-project" not_started 10 9 1778889600 1778889600
+node "proj-ray-tracer"                    "side-project" not_started 6 9 1778889600 1778889600
+node "proj-kaggle-competition"            "side-project" not_started 6 7 1778889600 1778889600
+node "proj-open-source-contribution"      "side-project" not_started 5 7 1778889600 1778889600
+
+# ---------------------------------------------------------------- career --
+node "career-leetcode-practice"           "career"       in_progress 6 4 1785542400 1788998400
+node "career-summer-internship-2027"      "career"       not_started 8 8 1785542400 1785542400
+node "career-undergrad-research-2027"     "career"       not_started 7 8 1785542400 1785542400
+node "career-grad-school-applications"    "career"       not_started 7 5 1785542400 1785542400
+
+# ------------------------------------------------ course prerequisite tree --
+#                                                                            eff  enj  ach  sim  weeks
+edge "cs101-intro-programming"           "cs102-object-oriented-programming"  PREREQ 5 8 0.95 0.8 15
+edge "cs101-intro-programming"           "cs210-computer-organization"        PREREQ 7 6 0.85 0.4 15
+edge "math101-calculus-1"                "math102-calculus-2"                 PREREQ 7 4 0.8  0.9 15
+edge "math102-calculus-2"                "math210-linear-algebra"             PREREQ 6 6 0.85 0.6 15
+edge "math102-calculus-2"                "stat250-probability-and-statistics" PREREQ 6 5 0.8  0.5 15
+edge "cs102-object-oriented-programming" "cs201-data-structures"              PREREQ 7 8 0.85 0.7 15
+edge "math150-discrete-math"             "cs201-data-structures"              PREREQ 7 8 0.85 0.5 15
+edge "cs102-object-oriented-programming" "cs230-software-engineering"         PREREQ 5 6 0.9  0.6 15
+edge "cs201-data-structures"             "cs220-systems-programming-in-c"     PREREQ 8 9 0.8  0.5 15
+edge "cs210-computer-organization"       "cs220-systems-programming-in-c"     PREREQ 8 9 0.8  0.7 15
+edge "cs201-data-structures"             "cs301-algorithms"                   PREREQ 9 8 0.75 0.8 15
+edge "math150-discrete-math"             "cs301-algorithms"                   PREREQ 9 8 0.75 0.6 15
+edge "cs220-systems-programming-in-c"    "cs310-operating-systems"            PREREQ 9 9 0.7  0.8 15
+edge "cs210-computer-organization"       "cs310-operating-systems"            PREREQ 9 9 0.7  0.7 15
+edge "cs201-data-structures"             "cs320-databases"                    PREREQ 6 6 0.9  0.4 15
+edge "cs220-systems-programming-in-c"    "cs330-computer-networks"            PREREQ 7 7 0.85 0.5 15
+edge "math150-discrete-math"             "cs340-theory-of-computation"        PREREQ 8 6 0.7  0.7 15
+edge "cs301-algorithms"                  "cs340-theory-of-computation"        PREREQ 8 6 0.7  0.8 15
+edge "cs201-data-structures"             "cs350-machine-learning"             PREREQ 8 9 0.75 0.4 15
+edge "math210-linear-algebra"            "cs350-machine-learning"             PREREQ 8 9 0.75 0.6 15
+edge "stat250-probability-and-statistics" "cs350-machine-learning"            PREREQ 8 9 0.75 0.7 15
+edge "cs301-algorithms"                  "cs401-compilers"                    PREREQ 9 8 0.65 0.5 15
+edge "cs340-theory-of-computation"       "cs401-compilers"                    PREREQ 9 8 0.65 0.7 15
+edge "cs310-operating-systems"           "cs410-distributed-systems"          PREREQ 8 8 0.7  0.7 15
+edge "cs330-computer-networks"           "cs410-distributed-systems"          PREREQ 8 8 0.7  0.8 15
+edge "cs310-operating-systems"           "cs420-computer-security"            PREREQ 7 9 0.75 0.6 15
+edge "cs330-computer-networks"           "cs420-computer-security"            PREREQ 7 9 0.75 0.7 15
+edge "cs350-machine-learning"            "cs450-deep-learning"                PREREQ 8 9 0.7  0.9 15
+edge "cs230-software-engineering"        "cs490-capstone-project-1"           PREREQ 8 8 0.8  0.7 15
+edge "cs301-algorithms"                  "cs490-capstone-project-1"           PREREQ 8 8 0.8  0.4 15
+edge "wrt101-technical-writing"          "cs490-capstone-project-1"           PREREQ 8 8 0.8  0.2 15
+edge "cs490-capstone-project-1"          "cs491-capstone-project-2"           PREREQ 8 8 0.85 0.95 15
+
+# ----------------------------------------------- side projects and career --
+edge "cs101-intro-programming"           "proj-personal-website"              ENABLES 3 7 0.95 0.3 3
+edge "cs102-object-oriented-programming" "proj-discord-study-bot"             ENABLES 4 9 0.9  0.4 4
+edge "cs220-systems-programming-in-c"    "proj-goalgraph"                     PREREQ  7 10 0.85 0.6 10
+edge "cs220-systems-programming-in-c"    "proj-toy-os-kernel"                 PREREQ  10 9 0.4 0.6 20
+edge "cs310-operating-systems"           "proj-toy-os-kernel"                 ENABLES 10 9 0.6 0.9 20
+edge "math210-linear-algebra"            "proj-ray-tracer"                    PREREQ  6 9 0.8  0.3 6
+edge "cs350-machine-learning"            "proj-kaggle-competition"            PREREQ  6 7 0.7  0.8 8
+edge "cs230-software-engineering"        "proj-open-source-contribution"      ENABLES 5 7 0.8  0.5 6
+edge "cs201-data-structures"             "career-leetcode-practice"           PREREQ  6 4 0.9  0.7 12
+edge "career-leetcode-practice"          "career-summer-internship-2027"      PREREQ  8 8 0.6  0.3 12
+edge "cs301-algorithms"                  "career-summer-internship-2027"      PREREQ  8 8 0.6  0.4 12
+edge "proj-goalgraph"                    "career-summer-internship-2027"      ENABLES 8 8 0.7  0.2 12
+edge "cs350-machine-learning"            "career-undergrad-research-2027"     PREREQ  7 8 0.65 0.6 12
+edge "career-undergrad-research-2027"    "career-grad-school-applications"    ENABLES 7 5 0.7  0.5 16
+edge "proj-goalgraph"                    "cs490-capstone-project-1"           CUSTOM  6 9 0.8  0.7 0
+
+# -------------------------------------------------- similarity / conflicts --
+edge "cs350-machine-learning"            "cs450-deep-learning"                SIMILAR 0 0 0 0.9 0
+edge "cs450-deep-learning"               "cs350-machine-learning"             SIMILAR 0 0 0 0.9 0
+edge "proj-kaggle-competition"           "cs450-deep-learning"                SIMILAR 0 0 0 0.7 0
+edge "cs340-theory-of-computation"       "cs401-compilers"                    SIMILAR 0 0 0 0.6 0
+edge "career-summer-internship-2027"     "career-undergrad-research-2027"     CONFLICTS 0 0 0 0 12
+edge "career-undergrad-research-2027"    "career-summer-internship-2027"      CONFLICTS 0 0 0 0 12
+edge "proj-toy-os-kernel"                "cs401-compilers"                    CONFLICTS 0 0 0 0 0
+edge "proj-weekend-hackathon"            "cs220-systems-programming-in-c"     CONFLICTS 0 0 0 0 1
